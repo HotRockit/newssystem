@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wdy.dao.UserDao">
+
+
+
+<select id="findUser" resultType="com.wdy.domain.User">
+  select * from user where username=#{username} and password=#{password}
+</select>
+
+  <select id="testUser" resultType="com.wdy.domain.User">
+    select * from user where username=#{username}
+  </select>
+
+  <insert id="addUser" >
+    insert into user values (null,#{username},#{password},1)
+  </insert>
+
+  <select id="findAllCommonUser" resultType="com.wdy.domain.User">
+    select * from user where userlevel=1
+  </select>
+
+  <update id="updatePassword">
+    update user set password=#{password} where userid=#{userid}
+  </update>
+
+  <delete id="deleteUser">
+    delete from user where userid=#{userid}
+  </delete>
+
+  <update id="updateUserLevel">
+    update user set userlevel=0 where userid=#{userid}
+  </update>
+
+
+
+
+
+</mapper>

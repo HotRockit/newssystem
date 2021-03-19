@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wdy.dao.NewsDao">
+<select id="findNews" resultType="com.wdy.domain.News">
+    select * from news where newsid=#{newsid}
+</select>
+
+    <insert id="addNews">
+        insert into news values (null,#{newstitle},#{newsauthor},#{newsdate},#{newsfile},#{newsstate},#{newstype})
+    </insert>
+
+    <select id="findAllNews" resultType="com.wdy.domain.News">
+        select * from news
+        <if test="newstype!='全部'">
+            where newstype=#{newstype}
+        </if>
+    </select>
+
+    <select id="findAllNewsByState" resultType="com.wdy.domain.News">
+        select * from news where newsstate=#{newsstate}
+        <if test="newstype!='全部'">
+            and newstype=#{newstype}
+        </if>
+    </select>
+    <select id="count" resultType="java.lang.Integer">
+        select count(newsid) from news where newsstate=#{newsstate}
+        <if test="newstype!='全部'">
+            and newstype=#{newstype}
+        </if>
+    </select>
+
+    <delete id="deleteNews">
+        delete from news where newsid=#{newsid}
+    </delete>
+
+    <update id="updateNews">
+        update news set newsstate="yes" where newsid=#{newsid}
+    </update>
+
+</mapper>
